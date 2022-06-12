@@ -1,14 +1,14 @@
-CREATE TABLE IF NOT EXISTS breed
+CREATE TABLE IF NOT EXISTS breed (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     name VARCHAR (200) NOT NULL
 );
 
-CREATE TABLE IF NOT EXISTS color1
+CREATE TABLE IF NOT EXISTS color1 (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     name VARCHAR (200) NOT NULL
 );
 
-CREATE TABLE IF NOT EXISTS color2
+CREATE TABLE IF NOT EXISTS color2 (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     name VARCHAR (200) NOT NULL
 );
@@ -26,7 +26,7 @@ CREATE TABLE IF NOT EXISTS outcome_type (
 
 CREATE TABLE IF NOT EXISTS new_animals (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
-    animal_id VARCHAR (50) NOT NULL,
+    animal_id VARCHAR (10) NOT NULL,
     age_upon_outcome VARCHAR (200) NOT NULL,
     name VARCHAR (200),
     date_of_birth TEXT NOT NULL,
@@ -44,7 +44,7 @@ CREATE TABLE IF NOT EXISTS new_animals (
     FOREIGN KEY (color1_id) REFERENCES animal_color(id),
     FOREIGN KEY (color2_id) REFERENCES animal_color(id),
     FOREIGN KEY (outcome_subtype_id) REFERENCES outcome_subtype(id),
-    FOREIGN KEY (outcome_type_id) REFERENCES outcome_type(id),
+    FOREIGN KEY (outcome_type_id) REFERENCES outcome_type(id)
 );
 
 

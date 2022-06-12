@@ -11,14 +11,29 @@ def serialize_row(row: sqlite3.Row):
     return {key: row[key] for key in row.keys()}
 
 
-@app.route('/<animal_id>/')
-def get_animal_id(animal_id):
+@app.route('/<animal_id>')
+def get_animal_id_short(animal_id):
 
-    con: sqlite3.Connection = app.config["db"]  # sqlite.Connection - позволяет иметь подсказку pycharm
-    cursor = con.cursor()
+    conn: sqlite3.Connection = app.config["db"]  # sqlite.Connection - позволяет иметь подсказку pycharm
+    cursor = conn.cursor()
 
-    cursor.execute(query.GET_ANIMAL_ID_QUERY, (animal_id,))
+    cursor.execute(query.GET_ANIMAL_ID_SHORT_QUERY, (animal_id, ))
     row = cursor.fetchone()
+
+    cursor.close()
+
+    return jsonify(serialize_row(row))
+
+
+@app.route('/<animal_id>/full')
+def get_animal_id_full(animal_id):
+
+    conn: sqlite3.Connection = app.config["db"]
+    cursor = conn.cursor()
+
+    cursor.execute(query.GET_ANIMAL_ID_FULL_QUERY, (animal_id, ))
+    row = cursor.fetchone()
+
     cursor.close()
 
     return jsonify(serialize_row(row))
@@ -29,6 +44,6 @@ if __name__ == "__main__":
     connection.row_factory = sqlite3.Row
     app.config["db"] = connection
     try:
-        app.run()
+        app.run(port=8080)
     except KeyboardInterrupt:
         connection.close()

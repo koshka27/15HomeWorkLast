@@ -1,4 +1,8 @@
-GET_ANIMAL_ID_QUERY = """
+GET_ANIMAL_ID_SHORT_QUERY = """
+    SELECT * FROM new_animals
+    WHERE animal_id = :1;
+"""
+GET_ANIMAL_ID_FULL_QUERY = """
     SELECT
         new_animals.id,
         age_upon_outcome,
