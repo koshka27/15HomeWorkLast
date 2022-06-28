@@ -13,8 +13,7 @@ GET_ANIMAL_ID_FULL_QUERY = """
         outcome_year,
         animal_type.name as 'type',
         animal_breed.name as 'breed',
-        animal.color1.name as 'color1',
-        animal.color2.name as 'color2',
+        animal.color.name as 'color',
         outcome_subtype.name as 'outcome_subtype',
         outcome_type.name as 'outcome_type',
     FROM new_animals
@@ -23,9 +22,7 @@ GET_ANIMAL_ID_FULL_QUERY = """
     LEFT JOIN animal_breed
         ON animal_breed.id = new_animals.breed_id
     LEFT JOIN animal_color as animal.color1
-        ON animal_color1.id = new_animals.color1_id
-    LEFT JOIN animal_color as animal.color2
-        ON animal_color2.id = new_animals.color2_id
+        ON animal_color.id = new_animals.color_id
     LEFT JOIN outcome_subtype
         ON outcome_subtype.id = new_animals.outcome_subtype_id
     LEFT JOIN outcome_type
