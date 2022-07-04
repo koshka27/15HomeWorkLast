@@ -5,7 +5,7 @@ INSERT INTO animal_breed (name)
 SELECT DISTINCT breed FROM animals;
 
 INSERT INTO animal_color (name)
-SELECT DISTINCT TRIM(color) as color FROM animals;
+SELECT DISTINCT TRIM(color1) as color FROM animals;
 
 INSERT INTO outcome_subtype (name)
 SELECT DISTINCT outcome_subtype FROM animals WHERE outcome_subtype IS NOT NULL;
@@ -23,9 +23,9 @@ INSERT INTO new_animals (
     outcome_year,
     type_id,
     breed_id,
-    color_id,
+    color1_id,
     outcome_subtype_id,
-    outcome_type_id,
+    outcome_type_id
 )
 SELECT
     age_upon_outcome,
@@ -43,9 +43,9 @@ FROM animals
 LEFT JOIN animal_type
     ON animal_type.name = animals.animal_type
 LEFT JOIN animal_breed
-    ON animal_breed.name = animals.animal_breed
+    ON animal_breed.name = animals.breed
 LEFT JOIN animal_color as animal_color
-    ON animal_color.name = animals.color
+    ON animal_color.name = animals.color1
 LEFT JOIN outcome_subtype
     ON outcome_subtype.name = animals.outcome_subtype
 LEFT JOIN outcome_type
